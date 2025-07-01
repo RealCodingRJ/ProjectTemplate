@@ -8,20 +8,17 @@ fn main() {
 
     while !is_created {
         let mut dir = fs::create_dir("src");
-        let mut file = fs::File::create("index.html").unwrap();
 
-        let mut question = String::new();
+        let mut command = String::new();
 
-        stdin().read_line(&mut question).unwrap();
+        stdin().read_line(&mut command).unwrap();
 
-        if question.contains("Y") || question.contains("Yes") {
+        if command.contains("Y") {
 
-            create_file_path()
+            get_file();
 
         }
-        else {
-            return;
-        }
+
 
         is_created = true
     }
@@ -30,12 +27,13 @@ fn main() {
 
 }
 
-
-fn create_file_path() {
+fn get_file() {
 
     let mut file = fs::File::create("index.html").unwrap();
+
     fs::File::create( "main.css").unwrap();
     fs::File::create("main.ts").unwrap();
+
 
     file.write("<!DOCTYPE html>".as_ref()).expect("TODO: panic message");
     file.write("<html lang='en'>".as_ref()).expect("TODO: panic message");
@@ -46,4 +44,5 @@ fn create_file_path() {
     file.write("</body>".as_ref()).expect("TODO: panic message");
 
 }
+
 
