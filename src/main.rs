@@ -1,24 +1,22 @@
 use std::{fs, thread};
 use std::io::{stdin, Write};
+use std::path::Path;
 
 fn main() {
 
     let mut is_created = false;
 
     while !is_created {
-        let mut dir = fs::create_dir("src");
 
+        println!("Enter Command: ");
         let mut command = String::new();
 
+        
         stdin().read_line(&mut command).unwrap();
-
-        if command.len() < 1 {
-            panic!("Length of Command Not More: {}", command)
-        }
-
+        
         if command.contains("Y") {
 
-            threads();
+            thread();
 
             get_file();
 
@@ -31,24 +29,21 @@ fn main() {
 
 }
 
-fn threads() {
+fn thread(){
 
-    let x_sleep = 2000 / 2;
+   thread::spawn(||  {
+       println!("Hello World");
+    });
 
-    let m =  thread::sleep(x_sleep.abs());
-    return m;
-}
-
-fn is_empty(message: String) -> bool {
-
-    return message == ""
 }
 
 fn get_file() {
 
     let mut file = fs::File::create("index.html").unwrap();
 
-    if (is_empty(file)) {
+    let path = Path::new("index.html");
+
+    if path.exists() {
 
         fs::File::create( "main.css").unwrap();
         fs::File::create("main.ts").unwrap();
@@ -61,9 +56,7 @@ fn get_file() {
         file.write("</html>".as_ref()).expect("TODO: panic message");
         file.write("<body>".as_ref()).expect("TODO: panic message");
         file.write("</body>".as_ref()).expect("TODO: panic message");
-
     }
-
 
 }
 
