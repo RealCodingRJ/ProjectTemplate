@@ -2,6 +2,11 @@ use std::{fs, thread};
 use std::io::{stdin, Write};
 use std::path::Path;
 
+fn create_error() {
+
+    panic!("Error Has been Created");
+}
+
 fn main() {
 
     let mut is_created = false;
@@ -21,7 +26,10 @@ fn main() {
             get_file();
 
         }
-
+            
+        else if command.contains("") {
+            create_error();
+        }
 
         is_created = true
     }
